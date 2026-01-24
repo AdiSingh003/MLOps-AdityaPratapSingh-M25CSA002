@@ -1,7 +1,7 @@
-# MLOps-AdityaPratapSingh-M25CSA002
-repo for MLOps projects
+# RESULTS
 
-## Results
+## Q1(A) 
+### MNIST Dataset
 
 | Dataset | Epochs | Batch Size | Optimizer | Learning Rate | Model    | Test Accuracy (%) | Best Val Acc (%) | pin_memory |
 |---------|--------|------------|-----------|---------------|----------|-------------------|------------------|------------|
@@ -70,6 +70,7 @@ repo for MLOps projects
 | MNIST   | 5      | 32         | Adam      | 0.0001        | RESNET18 | 99.29             | 99.4             | TRUE       |
 | MNIST   | 5      | 32         | Adam      | 0.0001        | RESNET50 | 98.14             | 98.93            | TRUE       |
 
+### FashionMNIST Dataset
 
 | Dataset      | Epochs | Batch Size | Optimizer | Learning Rate | Model    | Test Accuracy (%) | Best Val Acc (%) | pin_memory |
 |--------------|--------|------------|-----------|---------------|----------|-------------------|------------------|------------|
@@ -138,15 +139,23 @@ repo for MLOps projects
 | FashionMNIST | 5      | 32         | Adam      | 0.0001        | RESNET18 | 91.84             | 92.09            | TRUE       |
 | FashionMNIST | 5      | 32         | Adam      | 0.0001        | RESNET50 | 91.42             | 91.57            | TRUE       |
 
+## Q1(B)
+### MNIST Dataset
+
 | Dataset | Kernel | Test Accuracy (%) | Train Time (ms) |
 |---------|--------|-------------------|-----------------|
 | MNIST   | poly   | 86.88             | 21563.77        |
 | MNIST   | rbf    | 92.18             | 10941.59        |
 
+### FashionMNIST Dataset
+
 | Dataset      | Kernel | Test Accuracy (%) | Train Time (ms) |
 |--------------|--------|-------------------|-----------------|
 | FashionMNIST | poly   | 82.52             | 11123.27        |
 | FashionMNIST | rbf    | 85.7              | 8986.36         |
+
+## Q2
+### FashionMNIST Dataset
 
 | Compute | Batch Size | Optimizer | Learning Rate | Model    | Test Accuracy (%) | Train Time (ms) | FLOPs |
 |---------|------------|-----------|---------------|----------|-------------------|-----------------|-------|
