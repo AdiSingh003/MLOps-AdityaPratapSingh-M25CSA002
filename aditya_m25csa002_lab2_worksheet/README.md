@@ -1,38 +1,38 @@
 # Results
 
-| Epochs        | Train Accuracy    | Validation Accuracy | Test Accuracy    | 
-|---------------|-------------------|-----------------    |------------------|
-| Epoch [1/30]  | Train Acc: 47.60% | Val Acc: 55.40%     | Test Acc: 54.61% |
-| Epoch [2/30]  | Train Acc: 65.53% | Val Acc: 71.04%     | Test Acc: 70.80% |
-| Epoch [3/30]  | Train Acc: 73.39% | Val Acc: 74.64%     | Test Acc: 75.02% |
-| Epoch [4/30]  | Train Acc: 77.86% | Val Acc: 76.75%     | Test Acc: 76.67% |
-| Epoch [5/30]  | Train Acc: 80.64% | Val Acc: 78.48%     | Test Acc: 78.59% |
-| Epoch [6/30]  | Train Acc: 82.62% | Val Acc: 80.72%     | Test Acc: 80.97% |
-| Epoch [7/30]  | Train Acc: 84.50% | Val Acc: 83.05%     | Test Acc: 82.80% |
-| Epoch [8/30]  | Train Acc: 85.70% | Val Acc: 83.96%     | Test Acc: 83.73% |
-| Epoch [9/30]  | Train Acc: 87.00% | Val Acc: 85.04%     | Test Acc: 84.41% |
-| Epoch [10/30] | Train Acc: 88.11% | Val Acc: 84.90%     | Test Acc: 84.50% |
-| Epoch [11/30] | Train Acc: 88.83% | Val Acc: 85.15%     | Test Acc: 84.99% |
-| Epoch [12/30] | Train Acc: 89.66% | Val Acc: 85.29%     | Test Acc: 84.48% |
-| Epoch [13/30] | Train Acc: 90.55% | Val Acc: 87.16%     | Test Acc: 86.71% |
-| Epoch [14/30] | Train Acc: 90.72% | Val Acc: 87.38%     | Test Acc: 87.12% |
-| Epoch [15/30] | Train Acc: 91.71% | Val Acc: 86.73%     | Test Acc: 86.44% |
-| Epoch [16/30] | Train Acc: 92.34% | Val Acc: 84.73%     | Test Acc: 84.56% |
-| Epoch [17/30] | Train Acc: 92.62% | Val Acc: 88.54%     | Test Acc: 88.27% |
-| Epoch [18/30] | Train Acc: 93.33% | Val Acc: 88.69%     | Test Acc: 88.54% |
-| Epoch [19/30] | Train Acc: 93.73% | Val Acc: 87.55%     | Test Acc: 86.82% |
-| Epoch [20/30] | Train Acc: 93.86% | Val Acc: 87.03%     | Test Acc: 86.50% |
-| Epoch [21/30] | Train Acc: 94.61% | Val Acc: 89.47%     | Test Acc: 89.14% |
-| Epoch [22/30] | Train Acc: 94.73% | Val Acc: 88.88%     | Test Acc: 88.16% |
-| Epoch [23/30] | Train Acc: 94.99% | Val Acc: 89.64%     | Test Acc: 89.60% |
-| Epoch [24/30] | Train Acc: 95.39% | Val Acc: 89.16%     | Test Acc: 88.86% |
-| Epoch [25/30] | Train Acc: 95.60% | Val Acc: 89.65%     | Test Acc: 89.55% |
-| Epoch [26/30] | Train Acc: 95.86% | Val Acc: 90.00%     | Test Acc: 89.65% |
-| Epoch [27/30] | Train Acc: 96.34% | Val Acc: 89.00%     | Test Acc: 88.86% |
-| Epoch [28/30] | Train Acc: 96.27% | Val Acc: 89.79%     | Test Acc: 89.59% |
-| Epoch [29/30] | Train Acc: 96.20% | Val Acc: 88.77%     | Test Acc: 88.58% |
-| Epoch [30/30] | Train Acc: 96.73% | Val Acc: 90.84%     | Test Acc: 90.35% |
-
+| Epochs | Train Accuracy | Validation Accuracy | Test Accuracy | 
+|--------|----------------|---------------------|---------------|
+| 1      | 47.60%         | 55.40%              | 54.61%        |
+| 2      | 65.53%         | 71.04%              | 70.80%        |
+| 3      | 73.39%         | 74.64%              | 75.02%        |
+| 4      | 77.86%         | 76.75%              | 76.67%        |
+| 5      | 80.64%         | 78.48%              | 78.59%        |
+| 6      | 82.62%         | 80.72%              | 80.97%        |
+| 7      | 84.50%         | 83.05%              | 82.80%        |
+| 8      | 85.70%         | 83.96%              | 83.73%        |
+| 9      | 87.00%         | 85.04%              | 84.41%        |
+| 10     | 88.11%         | 84.90%              | 84.50%        |
+| 11     | 88.83%         | 85.15%              | 84.99%        |
+| 12     | 89.66%         | 85.29%              | 84.48%        |
+| 13     | 90.55%         | 87.16%              | 86.71%        |
+| 14     | 90.72%         | 87.38%              | 87.12%        |
+| 15     | 91.71%         | 86.73%              | 86.44%        |
+| 16     | 92.34%         | 84.73%              | 84.56%        |
+| 17     | 92.62%         | 88.54%              | 88.27%        |
+| 18     | 93.33%         | 88.69%              | 88.54%        |
+| 19     | 93.73%         | 87.55%              | 86.82%        |
+| 20     | 93.86%         | 87.03%              | 86.50%        |
+| 21     | 94.61%         | 89.47%              | 89.14%        |
+| 22     | 94.73%         | 88.88%              | 88.16%        |
+| 23     | 94.99%         | 89.64%              | 89.60%        |
+| 24     | 95.39%         | 89.16%              | 88.86%        |
+| 25     | 95.60%         | 89.65%              | 89.55%        |
+| 26     | 95.86%         | 90.00%              | 89.65%        |
+| 27     | 96.34%         | 89.00%              | 88.86%        |
+| 28     | 96.27%         | 89.79%              | 89.59%        |
+| 29     | 96.20%         | 88.77%              | 88.58%        |
+| 30     | 96.73%         | 90.84%              | 90.35%        |
+  
 ## Visualizations
 
 Wandb Link: https://wandb.ai/m25csa002-iit-jodhpur/cifar10-gradient-flow
