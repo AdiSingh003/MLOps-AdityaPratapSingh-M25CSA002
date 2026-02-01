@@ -35,4 +35,4 @@
 
 ## Visualizations
 
-Wandb Link: https://api.wandb.ai/links/m25csa002-iit-jodhpur/w9fz2h6y
+Wandb Link: https://wandb.ai/m25csa002-iit-jodhpur/cifar10-gradient-flow
