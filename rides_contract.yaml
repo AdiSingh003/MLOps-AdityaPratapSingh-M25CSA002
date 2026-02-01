@@ -1,0 +1,118 @@
+# ════════════════════════════════════════════════════════════════
+# DATA CONTRACT: CityMove Ride Events
+#
+# NEGOTIATION SUMMARY
+# ---------------------------------------------------------------
+# Producer: CityMove Data Engineering Team
+# Consumer: Machine Learning (Dynamic Pricing) Team
+#
+# Agreed Terms:
+# - Logical, business-friendly field names exposed to consumers
+# - Hard validation on fare, driver rating, and distance
+# - Passenger ID flagged as PII
+# - Freshness SLA: data available within 30 minutes of ride completion
+# - Any invalid fare or rating must block downstream consumption
+#
+# Incident Reference:
+# - Previous schema rename (cost_total → fare_final) caused ML outage
+# - This contract is the enforced interface to prevent recurrence
+# ════════════════════════════════════════════════════════════════
+
+dataContractSpecification: 0.9.3
+id: urn:datacontract:citymove:rides
+version: 1.0.0
+
+info:
+  title: "CityMove Ride Events"
+  description: |
+    Ride-level event data used for pricing analytics and ML retraining.
+    Provides stable, validated, business-friendly interface over raw DB tables.
+  owner: "CityMove Data Engineering"
+  contact:
+    name: "Data Platform Team"
+    email: "data-platform@citymove.com"
+    slack: "#data-platform"
+  classification: confidential
+  tags: [rideshare, pricing, ml, pii]
+
+schema:
+  type: object
+  properties:
+
+    ride_id:
+      type: string
+      description: "Unique identifier for a completed ride"
+      pii: false
+      # physical_mapping: r_id
+
+    pickup_timestamp:
+      type: string
+      format: date-time
+      description: "UTC timestamp when the ride started"
+      pii: false
+      # physical_mapping: ts_start
+
+    passenger_id:
+      type: integer
+      description: "Unique identifier of passenger (PII)"
+      pii: true
+      # physical_mapping: pax_id
+
+    driver_rating:
+      type: number
+      minimum: 1.0
+      maximum: 5.0
+      description: "Passenger-given driver rating (1.0–5.0)"
+      pii: false
+      # physical_mapping: d_rating
+
+    fare_usd:
+      type: number
+      minimum: 0
+      description: "Final ride fare in USD"
+      pii: false
+      # physical_mapping: fare_final
+
+    distance_meters:
+      type: integer
+      description: "Total distance traveled during ride (meters)"
+      pii: false
+      # physical_mapping: dist_m
+
+  required:
+    - ride_id
+    - pickup_timestamp
+    - passenger_id
+    - driver_rating
+    - fare_usd
+    - distance_meters
+
+sla:
+  freshness:
+    threshold: "30 minutes"
+    description: "Maximum allowed delay from ride completion to data availability"
+  availability:
+    percentage: "99.9%"
+    description: "Required uptime for ML retraining pipelines"
+
+quality:
+  - name: fare_non_negative
+    type: validity
+    expression: "fare_usd >= 0"
+    threshold: "100%"
+    enforcement: hard
+    description: "Negative fares are invalid and must block the pipeline"
+
+  - name: driver_rating_range
+    type: validity
+    expression: "driver_rating >= 1.0 AND driver_rating <= 5.0"
+    threshold: "100%"
+    enforcement: hard
+    description: "Driver rating must be between 1.0 and 5.0 inclusive"
+
+  - name: distance_not_null
+    type: completeness
+    column: distance_meters
+    threshold: "100%"
+    enforcement: hard
+    description: "Distance is mandatory for pricing models"

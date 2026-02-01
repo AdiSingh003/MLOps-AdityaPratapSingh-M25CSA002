@@ -1,0 +1,46 @@
+dataContractSpecification: 0.9.3
+id: urn:datacontract:fintech:transactions
+version: 1.0.0
+
+info:
+  title: "Financial Transaction Log"
+  description: "Real-time transaction data used for fraud detection"
+  owner: "Bank Data Engineering"
+  classification: restricted
+  tags: [finance, fraud, compliance]
+
+schema:
+  type: object
+  properties:
+
+    account_source_id:
+      type: string
+      description: "Source account identifier"
+      # physical_mapping: acct_src
+
+    account_destination_id:
+      type: string
+      description: "Destination account identifier"
+      # physical_mapping: acct_dest
+
+    transaction_timestamp:
+      type: string
+      format: date-time
+      description: "Timestamp of the transaction"
+      # physical_mapping: tx_ts
+
+  required:
+    - account_source_id
+    - account_destination_id
+    - transaction_timestamp
+
+quality:
+  - name: source_account_id_format
+    type: validity
+    expression: "REGEXP_LIKE(account_source_id, '^[A-Z0-9]{10}$')"
+    threshold: "100%"
+    enforcement: hard
+    description: |
+      Account IDs must be exactly 10 uppercase alphanumeric characters.
+      HARD CIRCUIT BREAKER:
+      Any violation must block the pipeline to prevent fraud model failure.

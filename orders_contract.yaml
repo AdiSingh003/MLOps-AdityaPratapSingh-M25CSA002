@@ -1,0 +1,47 @@
+dataContractSpecification: 0.9.3
+id: urn:datacontract:ecommerce:orders
+version: 1.0.0
+
+info:
+  title: "Flash Sale Orders Stream"
+  description: "Real-time order events used for marketing dashboards"
+  owner: "E-commerce Data Team"
+  classification: internal
+  tags: [ecommerce, orders, realtime]
+
+schema:
+  type: object
+  properties:
+
+    order_total_usd:
+      type: number
+      minimum: 0
+      description: "Total monetary value of the order in USD"
+      # physical_mapping: o_total
+
+    status:
+      type: string
+      enum: [PAID, SHIPPED, CANCELLED]
+      description: |
+        Order lifecycle status.
+        Mapped from codes: 2=PAID, 5=SHIPPED, 9=CANCELLED
+      # physical_mapping: status_code
+
+  required:
+    - order_total_usd
+    - status
+
+quality:
+  - name: order_total_non_negative
+    type: validity
+    expression: "order_total_usd >= 0"
+    threshold: "100%"
+    enforcement: hard
+    description: "Negative order totals are invalid"
+
+  - name: valid_status_code
+    type: validity
+    expression: "status IN ('PAID','SHIPPED','CANCELLED')"
+    threshold: "100%"
+    enforcement: hard
+    description: "Unmapped status codes must be rejected"
