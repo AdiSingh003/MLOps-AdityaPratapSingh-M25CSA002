@@ -14,7 +14,7 @@ WORKDIR /workspace
 
 COPY requirements.txt .
 COPY evaluate.py .
-COPY train.py
+COPY train.py .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
