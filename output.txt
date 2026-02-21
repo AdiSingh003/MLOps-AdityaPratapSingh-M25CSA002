@@ -1,0 +1,62 @@
+Classes: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+/opt/conda/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/opt/conda/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Model Loaded Successfully!
+
+Overall Accuracy: 8.90%
+F1 Score: 0.0279
+
+Classification Report:
+/opt/conda/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/opt/conda/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/opt/conda/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       490
+           1       0.00      0.00      0.00       568
+           2       0.00      0.00      0.00       516
+           3       0.00      0.00      0.00       505
+           4       0.00      0.00      0.00       491
+           5       0.10      0.75      0.17       445
+           6       0.00      0.00      0.00       479
+           7       0.00      0.00      0.00       514
+           8       0.00      0.00      0.00       487
+           9       0.07      0.22      0.11       505
+
+    accuracy                           0.09      5000
+   macro avg       0.02      0.10      0.03      5000
+weighted avg       0.02      0.09      0.03      5000
+
+
+Class-wise Accuracy:
+0              : 0.00% (0/490)
+1              : 0.00% (0/568)
+2              : 0.00% (0/516)
+3              : 0.00% (0/505)
+4              : 0.00% (0/491)
+5              : 75.06% (334/445)
+6              : 0.00% (0/479)
+7              : 0.00% (0/514)
+8              : 0.00% (0/487)
+9              : 21.98% (111/505)
+
+Confusion Matrix (rows = true, cols = predicted):
+[[   0    0    0    0    0  530    0    0    0  450]
+ [   0    0    0    0    0 1112    0    0    0   24]
+ [   0    0    0    0    0  448    0    0    0  584]
+ [   0    0    0    0    0  596    0    0    0  414]
+ [   0    0    0    0    0  826    0    0    0  156]
+ [   0    0    0    0    0  668    0    0    0  222]
+ [   0    0    0    0    0  534    0    0    0  424]
+ [   0    0    0    0    0  862    0    0    0  166]
+ [   0    0    0    0    0  478    0    0    0  496]
+ [   0    0    0    0    0  788    0    0    0  222]]
+
+Image: data/test/5/340.png
+Predicted Class: 9
+Confidence: 27.21%
