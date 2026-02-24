@@ -119,7 +119,7 @@ Best checkpoint: **Epoch 2** (lowest validation loss).
 | Resource | URL |
 |---|---|
 | 🤗 Hugging Face Model | `https://huggingface.co/AdiSingh003/distilbert-goodreadnews-finetuned/tree/main` |
-| 💻 GitHub Repository | `https://github.com/AdiSingh003/MLOps-AdityaPratapSingh-M25CSA002/tree/assg_2` |
+| 💻 GitHub Repository | `https://github.com/AdiSingh003/MLOps-AdityaPratapSingh-M25CSA002/tree/assg_3` |
 
 ---
 
