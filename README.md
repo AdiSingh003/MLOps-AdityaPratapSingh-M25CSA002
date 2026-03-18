@@ -42,15 +42,6 @@ pip install ray[tune] optuna pandas seaborn matplotlib tqdm nltk psutil
 
 The dataset is the **English–Hindi parallel corpus** from Tatoeba, hosted on Google Drive.
 
-| Property | Value |
-|---|---|
-| Source | Tatoeba (English–Hindi pairs) |
-| Total pairs | 13,186 |
-| Avg. English length | 5.6 words |
-| Avg. Hindi length | 6.3 words |
-| English vocab size | 4,117 tokens |
-| Hindi vocab size | 4,044 tokens |
-
 The script downloads the dataset automatically at runtime via:
 ```python
 file_id = '1dPWcMzr0H5utKjqa-HUod1_QhwXSsJfI'
@@ -95,32 +86,6 @@ python m25csa002_ass_4_tuned_en_to_hi.py
 
 ---
 
-## Script Walkthrough
-
-The script runs end-to-end in a single execution:
-
-### Part 1 — Baseline Training
-1. Loads and preprocesses the dataset
-2. Builds English and Hindi vocabularies (`freq_threshold=2`)
-3. Trains a Transformer for **100 epochs** with hardcoded hyperparameters
-4. Saves weights to `transformer_translation_final.pth`
-5. Evaluates BLEU on a 5-sentence validation set
-
-### Part 2 — Ray Tune + Optuna Sweep
-6. Defines a `train_tune(config)` function compatible with Ray Tune
-   - All imports, vocab building, and model construction are **self-contained inside the function** (required because Ray workers run in isolated processes)
-7. Defines the **6-hyperparameter search space** (see table below)
-8. Initialises Ray, respecting SLURM CPU/GPU allocations via environment variables
-9. Runs **20 trials × ≤30 epochs** with Optuna TPE + ASHA pruning
-10. Extracts the best configuration
-
-### Part 3 — Best Config Retrain & Evaluation
-11. Retrains a fresh model using the best config for 30 epochs
-12. Evaluates BLEU score and prints translation samples
-13. Saves all artefacts and plots
-
----
-
 ## Hyperparameter Search Space
 
 | Hyperparameter | API | Range / Choices | Rationale |
@@ -131,29 +96,6 @@ The script runs end-to-end in a single execution:
 | Feed-forward dim (d_ff) | `tune.choice` | {1024, 2048, 4096} | Controls per-layer capacity |
 | Dropout rate | `tune.uniform` | [0.05, 0.40] | Primary regularisation knob |
 | Num. layers | `tune.choice` | {4, 6} | Shallower = faster; deeper = more expressive |
-
-### Search Algorithm Configuration
-
-```python
-optuna_search  = OptunaSearch(metric="loss", mode="min")
-
-asha_scheduler = ASHAScheduler(
-    metric="loss", mode="min",
-    max_t=30,            # max epochs per trial
-    grace_period=5,      # min epochs before pruning
-    reduction_factor=2   # keep top 50% at each rung
-)
-
-tuner = tune.Tuner(
-    tune.with_resources(train_tune, resources={"cpu": 1, "gpu": 0.5}),
-    tune_config=tune.TuneConfig(
-        search_alg=optuna_search,
-        scheduler=asha_scheduler,
-        num_samples=20,
-    ),
-    param_space=search_space,
-)
-```
 
 ---
 
@@ -198,20 +140,6 @@ Also sets `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` to reduce GPU memor
 
 ---
 
-## Output Files
-
-| File | Description |
-|---|---|
-| `checkpoint.pt` | Resumable checkpoint saved every epoch (baseline) |
-| `transformer_translation_final.pth` | Baseline model state dict |
-| `m25csa002_ass_4_best_model.pth` | Best tuned model state dict |
-| `en_vocab.pkl` | Serialised English `Vocabulary` object |
-| `hi_vocab.pkl` | Serialised Hindi `Vocabulary` object |
-| `best_hyperparams.json` | Best config from Optuna sweep |
-| `plots/` | All 6 saved visualisation PNGs |
-
----
-
 ## Loading the Best Model
 
 ```python
@@ -235,21 +163,4 @@ model.eval()
 # Translate
 from m25csa002_ass_4_tuned_en_to_hi import translate_sentence
 print(translate_sentence(model, "How are you?", en_vocab, hi_vocab))
-# → आप कैसी हैं?
 ```
-
----
-
-## BLEU Evaluation
-
-BLEU is computed using NLTK's `corpus_bleu` with `SmoothingFunction.method4` on a fixed 5-sentence validation set:
-
-```python
-VAL_DATASET = [
-    ("I love you.",                 "मैं तुमसे प्यार करता हूँ।"),
-    ("How are you?",                "आप कैसे हैं?"),
-    ("You should sleep.",           "आपको सोना चाहिए।"),
-    ("Maybe Tom doesn't love you.", "टॉम शायद तुमसे प्यार नहीं करता है।"),
-    ("Let me tell Tom.",            "मुझे टॉम को बताने दीजिए।"),
-]
-
