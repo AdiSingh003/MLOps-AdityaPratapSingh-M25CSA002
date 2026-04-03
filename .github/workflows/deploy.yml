@@ -30,15 +30,14 @@ jobs:
 
     - name: Extract READMEs
       run: |
-        branches=$(git branch -r | grep -v HEAD | sed 's/origin\///')
+        branches=("assg_1" "assg_2" "assg_3" "assg_4" "assg_5" "worksheet1")
 
-        for branch in $branches
+        for branch in "${branches[@]}"
         do
-          if [ "$branch" != "main" ] && [ "$branch" != "gh-pages" ]; then
-            echo "Processing $branch"
-            git show origin/$branch:README.md > docs/branches/$branch.md \
-            || echo "# No README in $branch" > docs/branches/$branch.md
-          fi
+          echo "Processing $branch"
+
+          git show origin/$branch:README.md > docs/branches/$branch.md \
+          || echo "# No README found in $branch" > docs/branches/$branch.md
         done
 
     - name: Install dependencies

@@ -1,4 +1,4 @@
-site_name: My Project Docs
+site_name: MLOpsAditya
 site_description: Multi-branch documentation viewer
 site_author: Aditya Pratap Singh
 
@@ -25,12 +25,12 @@ theme:
 nav:
   - Home: index.md
   - Branch Docs:
-      - Branch 1: branches/branch1.md
-      - Branch 2: branches/branch2.md
-      - Branch 3: branches/branch3.md
-      - Branch 4: branches/branch4.md
-      - Branch 5: branches/branch5.md
-      - Branch 6: branches/branch6.md
+      - Assignment 1: branches/assg_1.md
+      - Assignment 2: branches/assg_2.md
+      - Assignment 3: branches/assg_3.md
+      - Assignment 4: branches/assg_4.md
+      - Assignment 5: branches/assg_5.md
+      - Worksheet 1: branches/worksheet1.md
 
 
 
