@@ -1,0 +1,2773 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Multi-branch documentation viewer">
+      
+      
+        <meta name="author" content="Aditya Pratap Singh">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>DLOps Assignment 5 – LoRA Fine-tuning & Adversarial Attacks - My Project Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dlops-assignment-5-lora-fine-tuning-adversarial-attacks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Project Docs" class="md-header__button md-logo" aria-label="My Project Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Project Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DLOps Assignment 5 – LoRA Fine-tuning &amp; Adversarial Attacks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../branch1.md" class="md-tabs__link">
+          
+  
+  
+  Branch Docs
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Project Docs" class="md-nav__button md-logo" aria-label="My Project Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    My Project Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch Docs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Branch Docs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../branch1.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../branch2.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../branch3.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../branch4.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../branch5.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../branch6.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch 6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-dependencies-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install dependencies locally
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authenticate-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authenticate services
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements-on-the-host-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements on the host machine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-build-the-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 · Build the image
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-run-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 · Run experiments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 · Run experiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-baseline-head-only-no-lora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1 – Baseline (head-only, no LoRA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q1-full-lora-grid-9-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1 – Full LoRA grid (9 experiments)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q1-optuna-hyperparameter-search-20-trials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1 – Optuna hyperparameter search (20 trials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q1-retrain-best-config-and-push-to-huggingface-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1 – Retrain best config and push to HuggingFace Hub
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2i-fgsm-attack-scratch-vs-ibm-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2(i) – FGSM Attack (Scratch vs IBM ART)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2ii-adversarial-detection-pgd-bim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2(ii) – Adversarial Detection (PGD &amp; BIM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-offline-wandb-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 · Offline WandB mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-saved-model-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 · Saved model files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#q1-vit-s-lora-on-cifar-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1 – ViT-S LoRA on CIFAR-100
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Q1 – ViT-S LoRA on CIFAR-100">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lora-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LoRA Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results-lora-grid-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results – LoRA Grid Search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results-optuna-hpo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results – Optuna HPO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-observations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Observations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detailed-per-epoch-training-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Per-Epoch Training Logs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Per-Epoch Training Logs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#baseline-no-lora-head-only-fine-tuning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Baseline – No LoRA (head-only fine-tuning)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-1-lora-rank2-alpha2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment 1 – LoRA Rank=2, Alpha=2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-2-lora-rank2-alpha4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment 2 – LoRA Rank=2, Alpha=4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-3-lora-rank2-alpha8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment 3 – LoRA Rank=2, Alpha=8
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-4-lora-rank4-alpha2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment 4 – LoRA Rank=4, Alpha=2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-5-lora-rank4-alpha4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment 5 – LoRA Rank=4, Alpha=4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-6-lora-rank4-alpha8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment 6 – LoRA Rank=4, Alpha=8
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-7-lora-rank8-alpha2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment 7 – LoRA Rank=8, Alpha=2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-8-lora-rank8-alpha4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment 8 – LoRA Rank=8, Alpha=4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-9-lora-rank8-alpha8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment 9 – LoRA Rank=8, Alpha=8
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#q2i-fgsm-attack-scratch-vs-ibm-art_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2(i) – FGSM Attack: Scratch vs IBM ART
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Q2(i) – FGSM Attack: Scratch vs IBM ART">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-run_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results-accuracy-vs-perturbation-strength" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results – Accuracy vs Perturbation Strength
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#q2ii-adversarial-detection-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2(ii) – Adversarial Detection Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Q2(ii) – Adversarial Detection Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-run_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results-victim-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results – Victim Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results-adversarial-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results – Adversarial Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wandb-logging-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WandB Logging Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wandb-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WandB Links
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#huggingface-link" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HuggingFace Link
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dlops-assignment-5-lora-fine-tuning-adversarial-attacks">DLOps Assignment 5 – LoRA Fine-tuning &amp; Adversarial Attacks<a class="headerlink" href="#dlops-assignment-5-lora-fine-tuning-adversarial-attacks" title="Permanent link">&para;</a></h1>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#docker">Docker</a></li>
+<li><a href="#q1--vit-s-lora-on-cifar-100">Q1 – ViT-S LoRA on CIFAR-100</a></li>
+<li><a href="#q2i--fgsm-attack-scratch-vs-ibm-art">Q2(i) – FGSM Attack: Scratch vs IBM ART</a></li>
+<li><a href="#q2ii--adversarial-detection-model">Q2(ii) – Adversarial Detection Model</a></li>
+<li><a href="#Links">Links</a></li>
+</ol>
+<hr />
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Python ≥ 3.9</li>
+<li>CUDA-capable GPU (recommended)</li>
+<li>Docker + NVIDIA Container Toolkit (for Docker-based execution)</li>
+</ul>
+<h3 id="install-dependencies-locally">Install dependencies locally<a class="headerlink" href="#install-dependencies-locally" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>torch&gt;<span class="o">=</span><span class="m">2</span>.0.0<span class="w"> </span>torchvision&gt;<span class="o">=</span><span class="m">0</span>.15.0
+pip<span class="w"> </span>install<span class="w"> </span>numpy&gt;<span class="o">=</span><span class="m">1</span>.24.0<span class="w"> </span>matplotlib&gt;<span class="o">=</span><span class="m">3</span>.7.0<span class="w"> </span>tqdm&gt;<span class="o">=</span><span class="m">4</span>.65.0
+pip<span class="w"> </span>install<span class="w"> </span>transformers&gt;<span class="o">=</span><span class="m">4</span>.38.0<span class="w"> </span>peft&gt;<span class="o">=</span><span class="m">0</span>.10.0<span class="w"> </span>huggingface_hub&gt;<span class="o">=</span><span class="m">0</span>.21.0
+pip<span class="w"> </span>install<span class="w"> </span>optuna&gt;<span class="o">=</span><span class="m">3</span>.6.0
+pip<span class="w"> </span>install<span class="w"> </span>wandb&gt;<span class="o">=</span><span class="m">0</span>.17.0
+pip<span class="w"> </span>install<span class="w"> </span>adversarial-robustness-toolbox&gt;<span class="o">=</span><span class="m">1</span>.17.0
+</code></pre></div>
+
+<p>Or install everything at once from the requirements file:</p>
+<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</code></pre></div>
+
+<h3 id="authenticate-services">Authenticate services<a class="headerlink" href="#authenticate-services" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Weights &amp; Biases (required for all scripts)</span>
+wandb<span class="w"> </span>login
+
+<span class="c1"># HuggingFace Hub (required only for Q1 Step 6: push model)</span>
+huggingface-cli<span class="w"> </span>login
+</code></pre></div>
+
+<hr />
+<h2 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
+<p>A <code>Dockerfile</code> is provided at the root of the project. It uses the official
+<code>pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime</code> base image so GPU training
+works without any additional CUDA setup on the host.</p>
+<h3 id="requirements-on-the-host-machine">Requirements on the host machine<a class="headerlink" href="#requirements-on-the-host-machine" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://docs.docker.com/engine/install/">Docker Engine</a> ≥ 20.10</li>
+<li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html">NVIDIA Container Toolkit</a> (for GPU access inside the container)</li>
+</ul>
+<h3 id="1-build-the-image">1 · Build the image<a class="headerlink" href="#1-build-the-image" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Run from the project root (where the Dockerfile lives)</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>dlops-assg5<span class="w"> </span>.
+</code></pre></div>
+
+<blockquote>
+<p>The build installs all Python packages from <code>requirements.txt</code> and copies
+every <code>.py</code> script into <code>/workspace</code> inside the container.</p>
+</blockquote>
+<hr />
+<h3 id="2-run-experiments">2 · Run experiments<a class="headerlink" href="#2-run-experiments" title="Permanent link">&para;</a></h3>
+<p>Pass your WandB API key via <code>-e WANDB_API_KEY=&lt;your_key&gt;</code>.<br />
+Training data (CIFAR-10 / CIFAR-100) is downloaded automatically on first run;
+mount a host directory to persist it across runs.</p>
+<h4 id="q1-baseline-head-only-no-lora">Q1 – Baseline (head-only, no LoRA)<a class="headerlink" href="#q1-baseline-head-only-no-lora" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">WANDB_API_KEY</span><span class="o">=</span>&lt;your_wandb_key&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/data:/workspace/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dlops-assg5<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>q1_train.py<span class="w"> </span>--baseline
+</code></pre></div>
+
+<h4 id="q1-full-lora-grid-9-experiments">Q1 – Full LoRA grid (9 experiments)<a class="headerlink" href="#q1-full-lora-grid-9-experiments" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">WANDB_API_KEY</span><span class="o">=</span>&lt;your_wandb_key&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/data:/workspace/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dlops-assg5<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>q1_train.py
+</code></pre></div>
+
+<h4 id="q1-optuna-hyperparameter-search-20-trials">Q1 – Optuna hyperparameter search (20 trials)<a class="headerlink" href="#q1-optuna-hyperparameter-search-20-trials" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">WANDB_API_KEY</span><span class="o">=</span>&lt;your_wandb_key&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/data:/workspace/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dlops-assg5<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>q1_optuna.py
+</code></pre></div>
+
+<h4 id="q1-retrain-best-config-and-push-to-huggingface-hub">Q1 – Retrain best config and push to HuggingFace Hub<a class="headerlink" href="#q1-retrain-best-config-and-push-to-huggingface-hub" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">WANDB_API_KEY</span><span class="o">=</span>&lt;your_wandb_key&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span>&lt;your_huggingface_token&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/data:/workspace/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dlops-assg5<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>q1_push.py
+</code></pre></div>
+
+<blockquote>
+<p>Set <code>HF_REPO</code> inside <code>q1_push.py</code> to your HuggingFace repo name before
+building the image (or override it with <code>-e HF_REPO=&lt;repo&gt;</code>).</p>
+</blockquote>
+<h4 id="q2i-fgsm-attack-scratch-vs-ibm-art">Q2(i) – FGSM Attack (Scratch vs IBM ART)<a class="headerlink" href="#q2i-fgsm-attack-scratch-vs-ibm-art" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">WANDB_API_KEY</span><span class="o">=</span>&lt;your_wandb_key&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/data:/workspace/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dlops-assg5<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>q2i_fgsm.py
+</code></pre></div>
+
+<h4 id="q2ii-adversarial-detection-pgd-bim">Q2(ii) – Adversarial Detection (PGD &amp; BIM)<a class="headerlink" href="#q2ii-adversarial-detection-pgd-bim" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">WANDB_API_KEY</span><span class="o">=</span>&lt;your_wandb_key&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/data:/workspace/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dlops-assg5<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>q2ii_detection.py
+</code></pre></div>
+
+<hr />
+<h3 id="3-offline-wandb-mode">3 · Offline WandB mode<a class="headerlink" href="#3-offline-wandb-mode" title="Permanent link">&para;</a></h3>
+<p>If you do not have network access inside the container, set:</p>
+<div class="codehilite"><pre><span></span><code>-e<span class="w"> </span><span class="nv">WANDB_MODE</span><span class="o">=</span>offline
+</code></pre></div>
+
+<p>Sync the run logs afterwards with:</p>
+<div class="codehilite"><pre><span></span><code>wandb<span class="w"> </span>sync<span class="w"> </span>wandb/offline-run-*
+</code></pre></div>
+
+<hr />
+<h3 id="4-saved-model-files">4 · Saved model files<a class="headerlink" href="#4-saved-model-files" title="Permanent link">&para;</a></h3>
+<p>Model checkpoints are written to <code>/workspace/</code> inside the container.
+The <code>-v $(pwd)/outputs:/workspace/outputs</code> mount above redirects them to the
+host. Alternatively, mount the entire workspace:</p>
+<div class="codehilite"><pre><span></span><code>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/workspace
+</code></pre></div>
+
+<hr />
+<h2 id="q1-vit-s-lora-on-cifar-100">Q1 – ViT-S LoRA on CIFAR-100<a class="headerlink" href="#q1-vit-s-lora-on-cifar-100" title="Permanent link">&para;</a></h2>
+<p><strong>Model:</strong> <code>WinKawaks/vit-small-patch16-224</code> (ImageNet pretrained)<br />
+<strong>Dataset:</strong> CIFAR-100<br />
+<strong>Task:</strong> Fine-tune with LoRA injected into Q, K, V attention weights</p>
+<h3 id="files">Files<a class="headerlink" href="#files" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q1_train.py</code></td>
+<td>Baseline + full LoRA grid (Rank ∈ {2,4,8} × Alpha ∈ {2,4,8})</td>
+</tr>
+<tr>
+<td><code>q1_optuna.py</code></td>
+<td>Optuna HPO over rank, alpha, dropout (20 trials)</td>
+</tr>
+<tr>
+<td><code>q1_push.py</code></td>
+<td>Retrain best config and push to HuggingFace Hub</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-run">How to Run<a class="headerlink" href="#how-to-run" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1 – Baseline (head-only fine-tuning, no LoRA):</strong></p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>q1_train.py<span class="w"> </span>--baseline
+</code></pre></div>
+
+<p><strong>Step 2 – Full LoRA grid (9 experiments):</strong></p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>q1_train.py
+</code></pre></div>
+
+<p><strong>Step 3 – Optuna hyperparameter search (20 trials):</strong></p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>q1_optuna.py
+</code></pre></div>
+
+<p><strong>Step 4 – Retrain best config and push to HuggingFace:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Edit the HF_REPO variable inside q1_push.py first, then:</span>
+python<span class="w"> </span>q1_push.py
+</code></pre></div>
+
+<h3 id="lora-configuration">LoRA Configuration<a class="headerlink" href="#lora-configuration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base model</td>
+<td>WinKawaks/vit-small-patch16-224</td>
+</tr>
+<tr>
+<td>Target modules</td>
+<td>query, key, value (Q, K, V)</td>
+</tr>
+<tr>
+<td>Ranks tested</td>
+<td>2, 4, 8</td>
+</tr>
+<tr>
+<td>Alphas tested</td>
+<td>2, 4, 8</td>
+</tr>
+<tr>
+<td>Dropout</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>Optimizer</td>
+<td>AdamW, lr=3e-4, weight_decay=1e-4</td>
+</tr>
+<tr>
+<td>Scheduler</td>
+<td>CosineAnnealingLR, T_max=10</td>
+</tr>
+<tr>
+<td>Epochs</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Batch size</td>
+<td>128</td>
+</tr>
+</tbody>
+</table>
+<h3 id="results-lora-grid-search">Results – LoRA Grid Search<a class="headerlink" href="#results-lora-grid-search" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>LoRA</th>
+<th>Rank</th>
+<th>Alpha</th>
+<th>Dropout</th>
+<th>Test Accuracy</th>
+<th>Trainable Params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No (Baseline)</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>81.00%</td>
+<td>38,500</td>
+</tr>
+<tr>
+<td>Yes (Q,K,V)</td>
+<td>2</td>
+<td>2</td>
+<td>0.1</td>
+<td><strong>89.85%</strong></td>
+<td>93,796</td>
+</tr>
+<tr>
+<td>Yes (Q,K,V)</td>
+<td>2</td>
+<td>4</td>
+<td>0.1</td>
+<td>89.73%</td>
+<td>93,796</td>
+</tr>
+<tr>
+<td>Yes (Q,K,V)</td>
+<td>2</td>
+<td>8</td>
+<td>0.1</td>
+<td>89.32%</td>
+<td>93,796</td>
+</tr>
+<tr>
+<td>Yes (Q,K,V)</td>
+<td>4</td>
+<td>2</td>
+<td>0.1</td>
+<td>89.84%</td>
+<td>149,092</td>
+</tr>
+<tr>
+<td>Yes (Q,K,V)</td>
+<td>4</td>
+<td>4</td>
+<td>0.1</td>
+<td>89.62%</td>
+<td>149,092</td>
+</tr>
+<tr>
+<td>Yes (Q,K,V)</td>
+<td>4</td>
+<td>8</td>
+<td>0.1</td>
+<td>89.63%</td>
+<td>149,092</td>
+</tr>
+<tr>
+<td>Yes (Q,K,V)</td>
+<td>8</td>
+<td>2</td>
+<td>0.1</td>
+<td>89.91%</td>
+<td>259,684</td>
+</tr>
+<tr>
+<td>Yes (Q,K,V)</td>
+<td><strong>8</strong></td>
+<td><strong>4</strong></td>
+<td>0.1</td>
+<td><strong>90.21%</strong></td>
+<td>259,684</td>
+</tr>
+<tr>
+<td>Yes (Q,K,V)</td>
+<td>8</td>
+<td>8</td>
+<td>0.1</td>
+<td>89.72%</td>
+<td>259,684</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Best grid configuration:</strong> Rank=8, Alpha=4 → <strong>90.21% test accuracy</strong></p>
+</blockquote>
+<h3 id="results-optuna-hpo">Results – Optuna HPO<a class="headerlink" href="#results-optuna-hpo" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sampler</td>
+<td>TPE</td>
+</tr>
+<tr>
+<td>Trials</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Best val accuracy</td>
+<td>89.86%</td>
+</tr>
+<tr>
+<td>Best rank</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Best alpha</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Best dropout</td>
+<td>0.1271</td>
+</tr>
+<tr>
+<td>Final test accuracy (retrained)</td>
+<td><strong>89.74%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-observations">Key Observations<a class="headerlink" href="#key-observations" title="Permanent link">&para;</a></h3>
+<ul>
+<li>LoRA fine-tuning gives a <strong>~8.8 pp accuracy gain</strong> over the head-only baseline (81.00% → 90.21%) while adding only ~221,000–259,000 trainable parameters — less than 0.3% of the full 22M-parameter ViT-S.</li>
+<li>Higher rank generally improves accuracy (R=8 &gt; R=4 &gt; R=2), but with diminishing returns.</li>
+<li>Alpha has less impact than rank; alpha=4 tends to be slightly better than alpha=8, likely due to implicit regularisation.</li>
+<li>Optuna converges to the same (rank=8, alpha=4) configuration found by grid search, confirming the grid result.</li>
+</ul>
+<h3 id="detailed-per-epoch-training-logs">Detailed Per-Epoch Training Logs<a class="headerlink" href="#detailed-per-epoch-training-logs" title="Permanent link">&para;</a></h3>
+<h4 id="baseline-no-lora-head-only-fine-tuning">Baseline – No LoRA (head-only fine-tuning)<a class="headerlink" href="#baseline-no-lora-head-only-fine-tuning" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.7390</td>
+<td style="text-align: right;">62.68%</td>
+<td style="text-align: right;">0.8900</td>
+<td style="text-align: right;">77.26%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.7706</td>
+<td style="text-align: right;">79.60%</td>
+<td style="text-align: right;">0.7360</td>
+<td style="text-align: right;">79.52%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.6485</td>
+<td style="text-align: right;">82.02%</td>
+<td style="text-align: right;">0.6850</td>
+<td style="text-align: right;">80.70%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.5872</td>
+<td style="text-align: right;">83.44%</td>
+<td style="text-align: right;">0.6594</td>
+<td style="text-align: right;">80.86%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.5467</td>
+<td style="text-align: right;">84.48%</td>
+<td style="text-align: right;">0.6476</td>
+<td style="text-align: right;">81.34%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.5180</td>
+<td style="text-align: right;">85.27%</td>
+<td style="text-align: right;">0.6387</td>
+<td style="text-align: right;">81.26%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.4981</td>
+<td style="text-align: right;">85.82%</td>
+<td style="text-align: right;">0.6344</td>
+<td style="text-align: right;">81.44%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.4840</td>
+<td style="text-align: right;">86.31%</td>
+<td style="text-align: right;">0.6299</td>
+<td style="text-align: right;">81.56%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.4753</td>
+<td style="text-align: right;">86.57%</td>
+<td style="text-align: right;">0.6297</td>
+<td style="text-align: right;">81.52%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.4707</td>
+<td style="text-align: right;">86.69%</td>
+<td style="text-align: right;">0.6291</td>
+<td style="text-align: right;"><strong>81.48%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="experiment-1-lora-rank2-alpha2">Experiment 1 – LoRA Rank=2, Alpha=2<a class="headerlink" href="#experiment-1-lora-rank2-alpha2" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.2713</td>
+<td style="text-align: right;">72.05%</td>
+<td style="text-align: right;">0.4334</td>
+<td style="text-align: right;">87.66%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3708</td>
+<td style="text-align: right;">88.69%</td>
+<td style="text-align: right;">0.3688</td>
+<td style="text-align: right;">88.66%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.2969</td>
+<td style="text-align: right;">90.79%</td>
+<td style="text-align: right;">0.3458</td>
+<td style="text-align: right;">89.48%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2524</td>
+<td style="text-align: right;">92.20%</td>
+<td style="text-align: right;">0.3378</td>
+<td style="text-align: right;">89.50%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.2202</td>
+<td style="text-align: right;">93.15%</td>
+<td style="text-align: right;">0.3357</td>
+<td style="text-align: right;">89.76%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1967</td>
+<td style="text-align: right;">94.02%</td>
+<td style="text-align: right;">0.3350</td>
+<td style="text-align: right;">89.66%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.1795</td>
+<td style="text-align: right;">94.65%</td>
+<td style="text-align: right;">0.3302</td>
+<td style="text-align: right;">89.98%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1673</td>
+<td style="text-align: right;">95.08%</td>
+<td style="text-align: right;">0.3305</td>
+<td style="text-align: right;">90.04%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.1599</td>
+<td style="text-align: right;">95.39%</td>
+<td style="text-align: right;">0.3302</td>
+<td style="text-align: right;">90.02%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.1558</td>
+<td style="text-align: right;">95.55%</td>
+<td style="text-align: right;">0.3302</td>
+<td style="text-align: right;"><strong>89.98%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="experiment-2-lora-rank2-alpha4">Experiment 2 – LoRA Rank=2, Alpha=4<a class="headerlink" href="#experiment-2-lora-rank2-alpha4" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.2163</td>
+<td style="text-align: right;">72.87%</td>
+<td style="text-align: right;">0.4252</td>
+<td style="text-align: right;">87.28%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3625</td>
+<td style="text-align: right;">89.04%</td>
+<td style="text-align: right;">0.3697</td>
+<td style="text-align: right;">88.88%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.2870</td>
+<td style="text-align: right;">91.15%</td>
+<td style="text-align: right;">0.3440</td>
+<td style="text-align: right;">89.24%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2415</td>
+<td style="text-align: right;">92.57%</td>
+<td style="text-align: right;">0.3409</td>
+<td style="text-align: right;">89.52%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.2075</td>
+<td style="text-align: right;">93.75%</td>
+<td style="text-align: right;">0.3351</td>
+<td style="text-align: right;">89.56%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1823</td>
+<td style="text-align: right;">94.58%</td>
+<td style="text-align: right;">0.3340</td>
+<td style="text-align: right;">89.90%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.1638</td>
+<td style="text-align: right;">95.30%</td>
+<td style="text-align: right;">0.3364</td>
+<td style="text-align: right;">89.54%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1511</td>
+<td style="text-align: right;">95.80%</td>
+<td style="text-align: right;">0.3382</td>
+<td style="text-align: right;">89.66%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.1433</td>
+<td style="text-align: right;">96.09%</td>
+<td style="text-align: right;">0.3374</td>
+<td style="text-align: right;">89.88%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.1386</td>
+<td style="text-align: right;">96.31%</td>
+<td style="text-align: right;">0.3372</td>
+<td style="text-align: right;"><strong>89.92%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="experiment-3-lora-rank2-alpha8">Experiment 3 – LoRA Rank=2, Alpha=8<a class="headerlink" href="#experiment-3-lora-rank2-alpha8" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.1697</td>
+<td style="text-align: right;">73.77%</td>
+<td style="text-align: right;">0.4263</td>
+<td style="text-align: right;">87.40%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3502</td>
+<td style="text-align: right;">89.44%</td>
+<td style="text-align: right;">0.3773</td>
+<td style="text-align: right;">88.84%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.2742</td>
+<td style="text-align: right;">91.58%</td>
+<td style="text-align: right;">0.3627</td>
+<td style="text-align: right;">89.18%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2258</td>
+<td style="text-align: right;">93.16%</td>
+<td style="text-align: right;">0.3532</td>
+<td style="text-align: right;">89.20%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.1903</td>
+<td style="text-align: right;">94.31%</td>
+<td style="text-align: right;">0.3545</td>
+<td style="text-align: right;">89.34%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1635</td>
+<td style="text-align: right;">95.26%</td>
+<td style="text-align: right;">0.3575</td>
+<td style="text-align: right;">89.40%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.1437</td>
+<td style="text-align: right;">95.99%</td>
+<td style="text-align: right;">0.3620</td>
+<td style="text-align: right;">89.10%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1306</td>
+<td style="text-align: right;">96.47%</td>
+<td style="text-align: right;">0.3615</td>
+<td style="text-align: right;">89.24%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.1218</td>
+<td style="text-align: right;">96.84%</td>
+<td style="text-align: right;">0.3633</td>
+<td style="text-align: right;">89.32%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.1170</td>
+<td style="text-align: right;">97.08%</td>
+<td style="text-align: right;">0.3629</td>
+<td style="text-align: right;"><strong>89.32%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="experiment-4-lora-rank4-alpha2">Experiment 4 – LoRA Rank=4, Alpha=2<a class="headerlink" href="#experiment-4-lora-rank4-alpha2" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.2544</td>
+<td style="text-align: right;">72.36%</td>
+<td style="text-align: right;">0.4340</td>
+<td style="text-align: right;">87.20%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3682</td>
+<td style="text-align: right;">88.93%</td>
+<td style="text-align: right;">0.3682</td>
+<td style="text-align: right;">88.66%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.2939</td>
+<td style="text-align: right;">90.82%</td>
+<td style="text-align: right;">0.3496</td>
+<td style="text-align: right;">89.22%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2501</td>
+<td style="text-align: right;">92.26%</td>
+<td style="text-align: right;">0.3358</td>
+<td style="text-align: right;">89.62%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.2181</td>
+<td style="text-align: right;">93.36%</td>
+<td style="text-align: right;">0.3327</td>
+<td style="text-align: right;">89.36%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1940</td>
+<td style="text-align: right;">94.07%</td>
+<td style="text-align: right;">0.3303</td>
+<td style="text-align: right;">89.72%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.1771</td>
+<td style="text-align: right;">94.72%</td>
+<td style="text-align: right;">0.3281</td>
+<td style="text-align: right;">89.78%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1651</td>
+<td style="text-align: right;">95.16%</td>
+<td style="text-align: right;">0.3302</td>
+<td style="text-align: right;">89.82%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.1573</td>
+<td style="text-align: right;">95.49%</td>
+<td style="text-align: right;">0.3292</td>
+<td style="text-align: right;">89.92%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.1534</td>
+<td style="text-align: right;">95.68%</td>
+<td style="text-align: right;">0.3289</td>
+<td style="text-align: right;"><strong>89.96%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="experiment-5-lora-rank4-alpha4">Experiment 5 – LoRA Rank=4, Alpha=4<a class="headerlink" href="#experiment-5-lora-rank4-alpha4" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.2151</td>
+<td style="text-align: right;">72.75%</td>
+<td style="text-align: right;">0.4265</td>
+<td style="text-align: right;">87.40%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3561</td>
+<td style="text-align: right;">89.29%</td>
+<td style="text-align: right;">0.3632</td>
+<td style="text-align: right;">88.70%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.2812</td>
+<td style="text-align: right;">91.38%</td>
+<td style="text-align: right;">0.3461</td>
+<td style="text-align: right;">89.34%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2349</td>
+<td style="text-align: right;">92.90%</td>
+<td style="text-align: right;">0.3395</td>
+<td style="text-align: right;">89.36%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.2006</td>
+<td style="text-align: right;">94.00%</td>
+<td style="text-align: right;">0.3342</td>
+<td style="text-align: right;">89.52%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1745</td>
+<td style="text-align: right;">94.93%</td>
+<td style="text-align: right;">0.3346</td>
+<td style="text-align: right;">89.62%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.1557</td>
+<td style="text-align: right;">95.68%</td>
+<td style="text-align: right;">0.3331</td>
+<td style="text-align: right;">89.84%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1431</td>
+<td style="text-align: right;">96.07%</td>
+<td style="text-align: right;">0.3359</td>
+<td style="text-align: right;">89.76%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.1351</td>
+<td style="text-align: right;">96.38%</td>
+<td style="text-align: right;">0.3352</td>
+<td style="text-align: right;">89.72%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.1308</td>
+<td style="text-align: right;">96.55%</td>
+<td style="text-align: right;">0.3355</td>
+<td style="text-align: right;"><strong>89.78%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="experiment-6-lora-rank4-alpha8">Experiment 6 – LoRA Rank=4, Alpha=8<a class="headerlink" href="#experiment-6-lora-rank4-alpha8" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.1825</td>
+<td style="text-align: right;">73.57%</td>
+<td style="text-align: right;">0.4210</td>
+<td style="text-align: right;">88.12%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3498</td>
+<td style="text-align: right;">89.50%</td>
+<td style="text-align: right;">0.3541</td>
+<td style="text-align: right;">89.16%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.2698</td>
+<td style="text-align: right;">91.61%</td>
+<td style="text-align: right;">0.3402</td>
+<td style="text-align: right;">89.70%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2193</td>
+<td style="text-align: right;">93.32%</td>
+<td style="text-align: right;">0.3368</td>
+<td style="text-align: right;">89.62%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.1804</td>
+<td style="text-align: right;">94.56%</td>
+<td style="text-align: right;">0.3331</td>
+<td style="text-align: right;">89.46%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1517</td>
+<td style="text-align: right;">95.69%</td>
+<td style="text-align: right;">0.3309</td>
+<td style="text-align: right;">89.52%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.1313</td>
+<td style="text-align: right;">96.44%</td>
+<td style="text-align: right;">0.3318</td>
+<td style="text-align: right;">89.86%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1179</td>
+<td style="text-align: right;">96.96%</td>
+<td style="text-align: right;">0.3346</td>
+<td style="text-align: right;">89.74%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.1095</td>
+<td style="text-align: right;">97.20%</td>
+<td style="text-align: right;">0.3348</td>
+<td style="text-align: right;">89.78%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.1050</td>
+<td style="text-align: right;">97.45%</td>
+<td style="text-align: right;">0.3355</td>
+<td style="text-align: right;"><strong>89.90%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="experiment-7-lora-rank8-alpha2">Experiment 7 – LoRA Rank=8, Alpha=2<a class="headerlink" href="#experiment-7-lora-rank8-alpha2" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.2727</td>
+<td style="text-align: right;">72.12%</td>
+<td style="text-align: right;">0.4410</td>
+<td style="text-align: right;">87.20%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3687</td>
+<td style="text-align: right;">88.94%</td>
+<td style="text-align: right;">0.3720</td>
+<td style="text-align: right;">88.80%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.2939</td>
+<td style="text-align: right;">91.02%</td>
+<td style="text-align: right;">0.3499</td>
+<td style="text-align: right;">89.18%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2484</td>
+<td style="text-align: right;">92.37%</td>
+<td style="text-align: right;">0.3401</td>
+<td style="text-align: right;">89.44%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.2165</td>
+<td style="text-align: right;">93.44%</td>
+<td style="text-align: right;">0.3313</td>
+<td style="text-align: right;">89.74%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1926</td>
+<td style="text-align: right;">94.12%</td>
+<td style="text-align: right;">0.3291</td>
+<td style="text-align: right;">89.90%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.1746</td>
+<td style="text-align: right;">94.86%</td>
+<td style="text-align: right;">0.3323</td>
+<td style="text-align: right;">89.92%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1626</td>
+<td style="text-align: right;">95.32%</td>
+<td style="text-align: right;">0.3305</td>
+<td style="text-align: right;">89.78%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.1549</td>
+<td style="text-align: right;">95.60%</td>
+<td style="text-align: right;">0.3304</td>
+<td style="text-align: right;">89.80%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.1510</td>
+<td style="text-align: right;">95.74%</td>
+<td style="text-align: right;">0.3305</td>
+<td style="text-align: right;"><strong>89.82%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="experiment-8-lora-rank8-alpha4">Experiment 8 – LoRA Rank=8, Alpha=4<a class="headerlink" href="#experiment-8-lora-rank8-alpha4" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.2349</td>
+<td style="text-align: right;">72.54%</td>
+<td style="text-align: right;">0.4321</td>
+<td style="text-align: right;">87.34%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3554</td>
+<td style="text-align: right;">89.25%</td>
+<td style="text-align: right;">0.3686</td>
+<td style="text-align: right;">88.76%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.2800</td>
+<td style="text-align: right;">91.34%</td>
+<td style="text-align: right;">0.3434</td>
+<td style="text-align: right;">89.48%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2324</td>
+<td style="text-align: right;">92.89%</td>
+<td style="text-align: right;">0.3408</td>
+<td style="text-align: right;">89.56%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.1971</td>
+<td style="text-align: right;">94.09%</td>
+<td style="text-align: right;">0.3393</td>
+<td style="text-align: right;">89.46%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1710</td>
+<td style="text-align: right;">94.92%</td>
+<td style="text-align: right;">0.3381</td>
+<td style="text-align: right;">89.86%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.1522</td>
+<td style="text-align: right;">95.67%</td>
+<td style="text-align: right;">0.3370</td>
+<td style="text-align: right;">89.78%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1392</td>
+<td style="text-align: right;">96.17%</td>
+<td style="text-align: right;">0.3392</td>
+<td style="text-align: right;">89.80%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.1310</td>
+<td style="text-align: right;">96.49%</td>
+<td style="text-align: right;">0.3378</td>
+<td style="text-align: right;">89.84%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.1268</td>
+<td style="text-align: right;">96.62%</td>
+<td style="text-align: right;">0.3377</td>
+<td style="text-align: right;"><strong>90.02%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="experiment-9-lora-rank8-alpha8">Experiment 9 – LoRA Rank=8, Alpha=8<a class="headerlink" href="#experiment-9-lora-rank8-alpha8" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Epoch</th>
+<th style="text-align: right;">Train Loss</th>
+<th style="text-align: right;">Train Accuracy</th>
+<th style="text-align: right;">Val Loss</th>
+<th style="text-align: right;">Val Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.1813</td>
+<td style="text-align: right;">73.52%</td>
+<td style="text-align: right;">0.4277</td>
+<td style="text-align: right;">87.12%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3461</td>
+<td style="text-align: right;">89.62%</td>
+<td style="text-align: right;">0.3656</td>
+<td style="text-align: right;">88.54%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.2654</td>
+<td style="text-align: right;">91.86%</td>
+<td style="text-align: right;">0.3518</td>
+<td style="text-align: right;">89.56%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2131</td>
+<td style="text-align: right;">93.54%</td>
+<td style="text-align: right;">0.3450</td>
+<td style="text-align: right;">89.14%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.1747</td>
+<td style="text-align: right;">94.74%</td>
+<td style="text-align: right;">0.3393</td>
+<td style="text-align: right;">89.86%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1461</td>
+<td style="text-align: right;">95.80%</td>
+<td style="text-align: right;">0.3404</td>
+<td style="text-align: right;">89.48%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.1260</td>
+<td style="text-align: right;">96.52%</td>
+<td style="text-align: right;">0.3464</td>
+<td style="text-align: right;">89.58%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.1119</td>
+<td style="text-align: right;">97.08%</td>
+<td style="text-align: right;">0.3439</td>
+<td style="text-align: right;">89.88%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.1037</td>
+<td style="text-align: right;">97.35%</td>
+<td style="text-align: right;">0.3460</td>
+<td style="text-align: right;">89.58%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.0991</td>
+<td style="text-align: right;">97.59%</td>
+<td style="text-align: right;">0.3463</td>
+<td style="text-align: right;"><strong>89.66%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="q2i-fgsm-attack-scratch-vs-ibm-art_1">Q2(i) – FGSM Attack: Scratch vs IBM ART<a class="headerlink" href="#q2i-fgsm-attack-scratch-vs-ibm-art_1" title="Permanent link">&para;</a></h2>
+<p><strong>Model:</strong> ResNet-18 trained from scratch on CIFAR-10 (target ≥ 72% clean accuracy)<br />
+<strong>Dataset:</strong> CIFAR-10<br />
+<strong>Attacks:</strong> FGSM implemented manually + FGSM via IBM ART</p>
+<h3 id="file">File<a class="headerlink" href="#file" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q2i_fgsm.py</code></td>
+<td>Train ResNet-18, apply FGSM (scratch + ART), log results to WandB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-run_1">How to Run<a class="headerlink" href="#how-to-run_1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>q2i_fgsm.py
+</code></pre></div>
+
+<p>This will:
+1. Train ResNet-18 from scratch for 30 epochs (SGD + CosineAnnealingLR).
+2. Run FGSM from scratch at ε ∈ {0.01, 0.02, 0.05, 0.10, 0.20, 0.30}.
+3. Run FGSM via IBM ART at the same ε values.
+4. Save and log a visual comparison grid (<code>fgsm_comparison.png</code>) to WandB.
+5. Log an accuracy table to WandB.</p>
+<h3 id="training-configuration">Training Configuration<a class="headerlink" href="#training-configuration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>ResNet-18 (from scratch, no pretrained weights)</td>
+</tr>
+<tr>
+<td>Dataset</td>
+<td>CIFAR-10 (train: 50k, test: 10k)</td>
+</tr>
+<tr>
+<td>Epochs</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Optimizer</td>
+<td>SGD, lr=0.1, momentum=0.9, weight_decay=5e-4</td>
+</tr>
+<tr>
+<td>Scheduler</td>
+<td>CosineAnnealingLR, T_max=30</td>
+</tr>
+<tr>
+<td>Batch size</td>
+<td>256</td>
+</tr>
+<tr>
+<td>Data augmentation</td>
+<td>RandomCrop(32, pad=4), RandomHorizontalFlip</td>
+</tr>
+</tbody>
+</table>
+<h3 id="results-accuracy-vs-perturbation-strength">Results – Accuracy vs Perturbation Strength<a class="headerlink" href="#results-accuracy-vs-perturbation-strength" title="Permanent link">&para;</a></h3>
+<p><strong>Baseline clean accuracy:</strong> 84.20%</p>
+<table>
+<thead>
+<tr>
+<th>ε (epsilon)</th>
+<th>FGSM Scratch Acc</th>
+<th>FGSM ART Acc</th>
+<th>Scratch Drop</th>
+<th>ART Drop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.010</td>
+<td>70.04%</td>
+<td>82.53%</td>
+<td>14.16 pp</td>
+<td>1.67 pp</td>
+</tr>
+<tr>
+<td>0.020</td>
+<td>55.70%</td>
+<td>80.10%</td>
+<td>28.50 pp</td>
+<td>4.10 pp</td>
+</tr>
+<tr>
+<td>0.050</td>
+<td>26.05%</td>
+<td>70.91%</td>
+<td>58.15 pp</td>
+<td>13.29 pp</td>
+</tr>
+<tr>
+<td>0.100</td>
+<td>9.82%</td>
+<td>56.49%</td>
+<td>74.38 pp</td>
+<td>27.71 pp</td>
+</tr>
+<tr>
+<td>0.200</td>
+<td>4.48%</td>
+<td>38.33%</td>
+<td>79.72 pp</td>
+<td>45.87 pp</td>
+</tr>
+<tr>
+<td>0.300</td>
+<td>3.67%</td>
+<td>28.78%</td>
+<td><strong>80.53 pp</strong></td>
+<td><strong>55.42 pp</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="analysis">Analysis<a class="headerlink" href="#analysis" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Manual FGSM is significantly stronger</strong> than ART FGSM at every ε value. At ε=0.05, manual FGSM drops accuracy by 58 pp vs only 13 pp for ART FGSM.</li>
+<li><strong>Why the gap?</strong> The ART classifier in this run receives images that are already mean/std normalised, while <code>clip_values=(0.0, 1.0)</code> constrains the attack to the raw pixel range. This mismatch limits ART's effective perturbation budget, making its attack appear weaker.</li>
+<li>Even a small ε=0.01 is enough for manual FGSM to degrade accuracy by 14 percentage points, demonstrating that deep models are highly sensitive to carefully crafted single-step perturbations.</li>
+<li>At ε=0.3, model accuracy with scratch FGSM collapses near chance level (3.67%), confirming the effectiveness of the attack.</li>
+</ul>
+<hr />
+<h2 id="q2ii-adversarial-detection-model">Q2(ii) – Adversarial Detection Model<a class="headerlink" href="#q2ii-adversarial-detection-model" title="Permanent link">&para;</a></h2>
+<p><strong>Victim model:</strong> ResNet-18 trained from scratch on CIFAR-10<br />
+<strong>Detector model:</strong> ResNet-34 (binary: 0=clean, 1=adversarial)<br />
+<strong>Attacks:</strong> PGD and BIM via IBM ART</p>
+<h3 id="file_1">File<a class="headerlink" href="#file_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q2ii_detection.py</code></td>
+<td>Train victim, generate PGD/BIM examples, train ResNet-34 detectors, log to WandB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-run_2">How to Run<a class="headerlink" href="#how-to-run_2" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>q2ii_detection.py
+</code></pre></div>
+
+<p>This will:
+1. Train a ResNet-18 victim model (≥72% target accuracy).
+2. Generate adversarial examples using PGD and BIM via IBM ART.
+3. Generate FGSM examples (scratch + ART) for WandB sample logging.
+4. Train two independent ResNet-34 binary detectors (one per attack type).
+5. Report and log detection accuracy to WandB.</p>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Victim model</td>
+<td>ResNet-18 (from scratch)</td>
+</tr>
+<tr>
+<td>Detector model</td>
+<td>ResNet-34 (binary output: 0=clean, 1=adversarial)</td>
+</tr>
+<tr>
+<td>Dataset</td>
+<td>CIFAR-10 (10,000 test images used for attack generation)</td>
+</tr>
+<tr>
+<td>PGD: ε</td>
+<td>8/255, step=2/255, iterations=40</td>
+</tr>
+<tr>
+<td>BIM: ε</td>
+<td>8/255, step=2/255, iterations=40</td>
+</tr>
+<tr>
+<td>FGSM: ε</td>
+<td>8/255</td>
+</tr>
+<tr>
+<td>Detector optimizer</td>
+<td>Adam, lr=1e-3, weight_decay=1e-4</td>
+</tr>
+<tr>
+<td>Detector scheduler</td>
+<td>CosineAnnealingLR, T_max=20</td>
+</tr>
+<tr>
+<td>Detector training</td>
+<td>20 epochs with val-accuracy-based best model selection</td>
+</tr>
+<tr>
+<td>Batch size</td>
+<td>128</td>
+</tr>
+</tbody>
+</table>
+<h3 id="results-victim-model">Results – Victim Model<a class="headerlink" href="#results-victim-model" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clean test accuracy</td>
+<td><strong>85.45%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="results-adversarial-detection">Results – Adversarial Detection<a class="headerlink" href="#results-adversarial-detection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attack</th>
+<th>Method</th>
+<th>Detection Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PGD</td>
+<td>IBM ART</td>
+<td><strong>99.27%</strong></td>
+</tr>
+<tr>
+<td>BIM</td>
+<td>IBM ART</td>
+<td><strong>99.15%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Both detectors <strong>exceed the 70% detection accuracy requirement</strong> by a large margin.</p>
+<h3 id="analysis_1">Analysis<a class="headerlink" href="#analysis_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Both PGD and BIM are well-detected</strong> — the ResNet-34 binary classifiers achieve &gt;99% detection accuracy, far above the 70% threshold.</li>
+<li>PGD and BIM are iterative attacks that leave strong, spatially coherent artefacts in the image. These artefacts are visually subtle to humans but highly discriminative for a trained binary classifier.</li>
+<li>The near-identical performance for PGD (99.27%) and BIM (99.15%) is expected: BIM is essentially PGD without random initialisation. Both create similar perturbation patterns at the same ε and step size.</li>
+<li><strong>WandB sample images</strong> logged: Clean, FGSM Scratch, FGSM ART, PGD, BIM (10 samples each).</li>
+</ul>
+<hr />
+<h2 id="wandb-logging-summary">WandB Logging Summary<a class="headerlink" href="#wandb-logging-summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Project</th>
+<th>What is Logged</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q1_train.py</code></td>
+<td><code>ViT-S-Finetune</code></td>
+<td>Train/val loss &amp; acc, class-wise test histogram, LoRA gradient norms, trainable param counts</td>
+</tr>
+<tr>
+<td><code>q1_optuna.py</code></td>
+<td><code>ViT-S-Finetune</code></td>
+<td>Per-trial val accuracy, best hyperparameters</td>
+</tr>
+<tr>
+<td><code>q2i_fgsm.py</code></td>
+<td><code>FGSM-Attack</code></td>
+<td>Clean accuracy, ε vs scratch/ART accuracy table, visual comparison grid</td>
+</tr>
+<tr>
+<td><code>q2ii_detection.py</code></td>
+<td><code>Adversarial-Detection</code></td>
+<td>Detector val accuracy per epoch, detection summary table, 10-sample image strips</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
+<h3 id="wandb-links">WandB Links<a class="headerlink" href="#wandb-links" title="Permanent link">&para;</a></h3>
+<ul>
+<li>https://wandb.ai/m25csa002-iit-jodhpur/ViT-S-Finetune?nw=nwuserm25csa002</li>
+<li>https://wandb.ai/m25csa002-iit-jodhpur/ViT-S-Finetune-optuna?nw=nwuserm25csa002</li>
+<li>https://wandb.ai/m25csa002-iit-jodhpur/FGSM-Attack?nw=nwuserm25csa002</li>
+<li>https://wandb.ai/m25csa002-iit-jodhpur/Adversarial-Detection?nw=nwuserm25csa002</li>
+</ul>
+<h3 id="huggingface-link">HuggingFace Link<a class="headerlink" href="#huggingface-link" title="Permanent link">&para;</a></h3>
+<ul>
+<li>https://huggingface.co/AdiSingh003/vit-small-lora-cifar100/tree/main</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
