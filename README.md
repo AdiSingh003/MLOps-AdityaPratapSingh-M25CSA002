@@ -1,15 +1,5 @@
 # DLOps Assignment 5 – LoRA Fine-tuning & Adversarial Attacks
 
-## Table of Contents
-1. [Installation](#installation)
-2. [Docker](#docker)
-3. [Q1 – ViT-S LoRA on CIFAR-100](#q1--vit-s-lora-on-cifar-100)
-4. [Q2(i) – FGSM Attack: Scratch vs IBM ART](#q2i--fgsm-attack-scratch-vs-ibm-art)
-5. [Q2(ii) – Adversarial Detection Model](#q2ii--adversarial-detection-model)
-6. [Links](#Links)
-
----
-
 ## Installation
 
 ### Prerequisites
@@ -159,8 +149,7 @@ wandb sync wandb/offline-run-*
 ### 4 · Saved model files
 
 Model checkpoints are written to `/workspace/` inside the container.
-The `-v $(pwd)/outputs:/workspace/outputs` mount above redirects them to the
-host. Alternatively, mount the entire workspace:
+Alternatively, mount the entire workspace:
 
 ```bash
 -v $(pwd):/workspace
@@ -181,29 +170,6 @@ host. Alternatively, mount the entire workspace:
 | `q1_train.py` | Baseline + full LoRA grid (Rank ∈ {2,4,8} × Alpha ∈ {2,4,8}) |
 | `q1_optuna.py` | Optuna HPO over rank, alpha, dropout (20 trials) |
 | `q1_push.py` | Retrain best config and push to HuggingFace Hub |
-
-### How to Run
-
-**Step 1 – Baseline (head-only fine-tuning, no LoRA):**
-```bash
-python q1_train.py --baseline
-```
-
-**Step 2 – Full LoRA grid (9 experiments):**
-```bash
-python q1_train.py
-```
-
-**Step 3 – Optuna hyperparameter search (20 trials):**
-```bash
-python q1_optuna.py
-```
-
-**Step 4 – Retrain best config and push to HuggingFace:**
-```bash
-# Edit the HF_REPO variable inside q1_push.py first, then:
-python q1_push.py
-```
 
 ### LoRA Configuration
 
@@ -248,13 +214,6 @@ python q1_push.py
 | Best dropout | 0.1271 |
 | Final test accuracy (retrained) | **89.74%** |
 
-### Key Observations
-
-- LoRA fine-tuning gives a **~8.8 pp accuracy gain** over the head-only baseline (81.00% → 90.21%) while adding only ~221,000–259,000 trainable parameters — less than 0.3% of the full 22M-parameter ViT-S.
-- Higher rank generally improves accuracy (R=8 > R=4 > R=2), but with diminishing returns.
-- Alpha has less impact than rank; alpha=4 tends to be slightly better than alpha=8, likely due to implicit regularisation.
-- Optuna converges to the same (rank=8, alpha=4) configuration found by grid search, confirming the grid result.
-
 ### Detailed Per-Epoch Training Logs
 
 #### Baseline – No LoRA (head-only fine-tuning)
@@ -272,8 +231,6 @@ python q1_push.py
 | 9 | 0.4753 | 86.57% | 0.6297 | 81.52% |
 | 10 | 0.4707 | 86.69% | 0.6291 | **81.48%** |
 
----
-
 #### Experiment 1 – LoRA Rank=2, Alpha=2
 
 | Epoch | Train Loss | Train Accuracy | Val Loss | Val Accuracy |
@@ -288,8 +245,6 @@ python q1_push.py
 | 8 | 0.1673 | 95.08% | 0.3305 | 90.04% |
 | 9 | 0.1599 | 95.39% | 0.3302 | 90.02% |
 | 10 | 0.1558 | 95.55% | 0.3302 | **89.98%** |
-
----
 
 #### Experiment 2 – LoRA Rank=2, Alpha=4
 
@@ -306,8 +261,6 @@ python q1_push.py
 | 9 | 0.1433 | 96.09% | 0.3374 | 89.88% |
 | 10 | 0.1386 | 96.31% | 0.3372 | **89.92%** |
 
----
-
 #### Experiment 3 – LoRA Rank=2, Alpha=8
 
 | Epoch | Train Loss | Train Accuracy | Val Loss | Val Accuracy |
@@ -322,8 +275,6 @@ python q1_push.py
 | 8 | 0.1306 | 96.47% | 0.3615 | 89.24% |
 | 9 | 0.1218 | 96.84% | 0.3633 | 89.32% |
 | 10 | 0.1170 | 97.08% | 0.3629 | **89.32%** |
-
----
 
 #### Experiment 4 – LoRA Rank=4, Alpha=2
 
@@ -340,8 +291,6 @@ python q1_push.py
 | 9 | 0.1573 | 95.49% | 0.3292 | 89.92% |
 | 10 | 0.1534 | 95.68% | 0.3289 | **89.96%** |
 
----
-
 #### Experiment 5 – LoRA Rank=4, Alpha=4
 
 | Epoch | Train Loss | Train Accuracy | Val Loss | Val Accuracy |
@@ -356,8 +305,6 @@ python q1_push.py
 | 8 | 0.1431 | 96.07% | 0.3359 | 89.76% |
 | 9 | 0.1351 | 96.38% | 0.3352 | 89.72% |
 | 10 | 0.1308 | 96.55% | 0.3355 | **89.78%** |
-
----
 
 #### Experiment 6 – LoRA Rank=4, Alpha=8
 
@@ -374,8 +321,6 @@ python q1_push.py
 | 9 | 0.1095 | 97.20% | 0.3348 | 89.78% |
 | 10 | 0.1050 | 97.45% | 0.3355 | **89.90%** |
 
----
-
 #### Experiment 7 – LoRA Rank=8, Alpha=2
 
 | Epoch | Train Loss | Train Accuracy | Val Loss | Val Accuracy |
@@ -391,8 +336,6 @@ python q1_push.py
 | 9 | 0.1549 | 95.60% | 0.3304 | 89.80% |
 | 10 | 0.1510 | 95.74% | 0.3305 | **89.82%** |
 
----
-
 #### Experiment 8 – LoRA Rank=8, Alpha=4
 
 | Epoch | Train Loss | Train Accuracy | Val Loss | Val Accuracy |
@@ -407,8 +350,6 @@ python q1_push.py
 | 8 | 0.1392 | 96.17% | 0.3392 | 89.80% |
 | 9 | 0.1310 | 96.49% | 0.3378 | 89.84% |
 | 10 | 0.1268 | 96.62% | 0.3377 | **90.02%** |
-
----
 
 #### Experiment 9 – LoRA Rank=8, Alpha=8
 
@@ -439,11 +380,6 @@ python q1_push.py
 |------|---------|
 | `q2i_fgsm.py` | Train ResNet-18, apply FGSM (scratch + ART), log results to WandB |
 
-### How to Run
-
-```bash
-python q2i_fgsm.py
-```
 
 This will:
 1. Train ResNet-18 from scratch for 30 epochs (SGD + CosineAnnealingLR).
@@ -477,13 +413,6 @@ This will:
 | 0.200 | 4.48% | 38.33% | 79.72 pp | 45.87 pp |
 | 0.300 | 3.67% | 28.78% | **80.53 pp** | **55.42 pp** |
 
-### Analysis
-
-- **Manual FGSM is significantly stronger** than ART FGSM at every ε value. At ε=0.05, manual FGSM drops accuracy by 58 pp vs only 13 pp for ART FGSM.
-- **Why the gap?** The ART classifier in this run receives images that are already mean/std normalised, while `clip_values=(0.0, 1.0)` constrains the attack to the raw pixel range. This mismatch limits ART's effective perturbation budget, making its attack appear weaker.
-- Even a small ε=0.01 is enough for manual FGSM to degrade accuracy by 14 percentage points, demonstrating that deep models are highly sensitive to carefully crafted single-step perturbations.
-- At ε=0.3, model accuracy with scratch FGSM collapses near chance level (3.67%), confirming the effectiveness of the attack.
-
 ---
 
 ## Q2(ii) – Adversarial Detection Model
@@ -497,12 +426,6 @@ This will:
 | File | Purpose |
 |------|---------|
 | `q2ii_detection.py` | Train victim, generate PGD/BIM examples, train ResNet-34 detectors, log to WandB |
-
-### How to Run
-
-```bash
-python q2ii_detection.py
-```
 
 This will:
 1. Train a ResNet-18 victim model (≥72% target accuracy).
@@ -540,13 +463,6 @@ This will:
 | BIM | IBM ART | **99.15%** |
 
 Both detectors **exceed the 70% detection accuracy requirement** by a large margin.
-
-### Analysis
-
-- **Both PGD and BIM are well-detected** — the ResNet-34 binary classifiers achieve >99% detection accuracy, far above the 70% threshold.
-- PGD and BIM are iterative attacks that leave strong, spatially coherent artefacts in the image. These artefacts are visually subtle to humans but highly discriminative for a trained binary classifier.
-- The near-identical performance for PGD (99.27%) and BIM (99.15%) is expected: BIM is essentially PGD without random initialisation. Both create similar perturbation patterns at the same ε and step size.
-- **WandB sample images** logged: Clean, FGSM Scratch, FGSM ART, PGD, BIM (10 samples each).
 
 ---
 
