@@ -1,18 +1,41 @@
-# 🚀 Multi-Branch Documentation Hub
+# 👨‍💻 AI/ML Assignment Hub
 
-This site aggregates README files from all branches.
-
-## 📂 Branches
-
-| Branch | Description |
-|--------|------------|
-| branch1 | Assignment 1 |
-| branch2 | Assignment 2 |
-| branch3 | Assignment 3 |
-| branch4 | Assignment 4 |
-| branch5 | Assignment 5 |
-| branch6 | Worksheet 1 |
+Welcome to my structured repository of assignments and experiments.
 
 ---
 
-👉 Use the navigation bar to explore each branch.
+## 🚀 Projects Overview
+
+<div class="grid cards">
+
+- :material-brain: **Assignment 1**
+  
+  LoRA fine-tuning implementation  
+  [View →](branches/assg_1.md)
+
+- :material-robot: **Assignment 2**
+  
+  Adversarial attack (FGSM)  
+  [View →](branches/assg_2.md)
+
+- :material-eye: **Assignment 3**
+  
+  PGD + detection  
+  [View →](branches/assg_3.md)
+
+- :material-chart-line: **Assignment 4**
+  
+  Analysis + evaluation  
+  [View →](branches/assg_4.md)
+
+- :material-database: **Assignment 5**
+  
+  Model optimization  
+  [View →](branches/assg_5.md)
+
+- :material-notebook: **Worksheet**
+  
+  Practice problems  
+  [View →](branches/worksheet1.md)
+
+</div>
