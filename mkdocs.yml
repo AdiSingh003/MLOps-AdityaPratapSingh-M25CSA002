@@ -1,8 +1,9 @@
 site_name: MLOpsAditya
 site_description: Branch-based documentation site
-site_author: Your Name
+site_author: Aditya Singh
 
 theme:
+  name: material
 
   features:
     - navigation.tabs
@@ -46,9 +47,6 @@ nav:
       - Assignment 5: branches/assg_5.md
   - Worksheet:
       - Worksheet 1: branches/worksheet1.md
-
-extra_css:
-  - stylesheets/extra.css
 
 extra:
   generator: false
