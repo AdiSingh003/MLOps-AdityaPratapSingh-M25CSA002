@@ -1,47 +1,56 @@
-name: Deploy Docs
+name: Deploy MkDocs to GitHub Pages
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout main
-      uses: actions/checkout@v4
+      - name: Checkout main repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Setup Git
-      run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "actions@github.com"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
 
-    - name: Fetch all branches
-      run: git fetch --all
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material
 
-    - name: Create docs folder
-      run: mkdir -p docs/branches
+      - name: Fetch all branches
+        run: git fetch --all
 
-    - name: Extract READMEs
-      run: |
-        branches=("assg_1" "assg_2" "assg_3" "assg_4" "assg_5" "worksheet1")
+      - name: Generate branch docs
+        run: |
+          mkdir -p docs/branches
 
-        for branch in "${branches[@]}"
-        do
-          echo "Processing $branch"
+          branches=("assg_1" "assg_2" "assg_3" "assg_4" "assg_5" "worksheet1")
 
-          git show origin/$branch:README.md > docs/branches/$branch.md \
-          || echo "# No README found in $branch" > docs/branches/$branch.md
-        done
+          for branch in "${branches[@]}"
+          do
+            echo "Processing $branch"
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt
+            if git ls-remote --exit-code --heads origin $branch; then
+              git show origin/$branch:README.md > docs/branches/$branch.md \
+              || echo "# No README found in $branch" > docs/branches/$branch.md
+            else
+              echo "# Branch $branch not found" > docs/branches/$branch.md
+            fi
 
-    - name: Deploy
-      run: mkdocs gh-deploy --force
+            # Add header
+            sed -i "1i # ${branch}\n\n> Auto-generated from branch: ${branch}\n\n---\n" docs/branches/$branch.md
+          done
+
+      - name: Deploy to GitHub Pages
+        run: |
+          mkdocs gh-deploy --force

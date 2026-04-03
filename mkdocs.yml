@@ -1,6 +1,6 @@
 site_name: MLOpsAditya
-site_description: Multi-branch documentation viewer
-site_author: Aditya Pratap Singh
+site_description: Branch-based documentation site
+site_author: Your Name
 
 theme:
   name: material
@@ -12,7 +12,6 @@ theme:
     - navigation.top
     - navigation.instant
     - content.code.copy
-    - content.tabs.link
     - search.suggest
     - search.highlight
 
@@ -31,8 +30,12 @@ theme:
         icon: material/weather-sunny
         name: Light mode
 
-extra_css:
-  - stylesheets/extra.css
+plugins:
+  - search
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
 
 nav:
   - Home: index.md
@@ -45,13 +48,8 @@ nav:
   - Worksheet:
       - Worksheet 1: branches/worksheet1.md
 
-plugins:
-  - search
+repo_url: https://github.com/YOUR_USERNAME/YOUR_REPO
+repo_name: View on GitHub
 
-markdown_extensions:
-  - attr_list
-  - md_in_html
-  - admonition
-  - codehilite
-  - toc:
-      permalink: true
+extra_css:
+  - stylesheets/extra.css

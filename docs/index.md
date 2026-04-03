@@ -10,12 +10,12 @@ Welcome to my structured repository of assignments and experiments.
 
 - :material-brain: **Assignment 1**
   
-  LoRA fine-tuning implementation  
+  LoRA / fine-tuning  
   [View →](branches/assg_1.md)
 
 - :material-robot: **Assignment 2**
   
-  Adversarial attack (FGSM)  
+  FGSM attack  
   [View →](branches/assg_2.md)
 
 - :material-eye: **Assignment 3**
@@ -25,12 +25,12 @@ Welcome to my structured repository of assignments and experiments.
 
 - :material-chart-line: **Assignment 4**
   
-  Analysis + evaluation  
+  Evaluation & metrics  
   [View →](branches/assg_4.md)
 
 - :material-database: **Assignment 5**
   
-  Model optimization  
+  Optimization  
   [View →](branches/assg_5.md)
 
 - :material-notebook: **Worksheet**
