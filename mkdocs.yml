@@ -3,7 +3,6 @@ site_description: Branch-based documentation site
 site_author: Your Name
 
 theme:
-  name: material
 
   features:
     - navigation.tabs
@@ -48,8 +47,8 @@ nav:
   - Worksheet:
       - Worksheet 1: branches/worksheet1.md
 
-repo_url: https://github.com/YOUR_USERNAME/YOUR_REPO
-repo_name: View on GitHub
-
 extra_css:
   - stylesheets/extra.css
+
+extra:
+  generator: false

@@ -30,6 +30,16 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
+      - name: Use main README as homepage
+        run: |
+          echo "Generating homepage from main README"
+
+          if [ -f README.md ]; then
+            cp README.md docs/index.md
+          else
+            echo "# Home\n\nNo README found in main branch." > docs/index.md
+          fi
+
       - name: Generate branch docs
         run: |
           mkdir -p docs/branches
@@ -46,9 +56,6 @@ jobs:
             else
               echo "# Branch $branch not found" > docs/branches/$branch.md
             fi
-
-            # Add header
-            sed -i "1i # ${branch}\n\n> Auto-generated from branch: ${branch}\n\n---\n" docs/branches/$branch.md
           done
 
       - name: Deploy to GitHub Pages
