@@ -9,7 +9,7 @@
         <meta name="description" content="Branch-based documentation site">
       
       
-        <meta name="author" content="Your Name">
+        <meta name="author" content="Aditya Singh">
       
       
       
@@ -53,8 +53,6 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -80,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#assg_3" class="md-skip">
+        <a href="#training-and-fine-tuning-bert-for-classification" class="md-skip">
           Skip to content
         </a>
       
@@ -195,18 +193,6 @@
       
     
     
-      <div class="md-header__source">
-        <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
-  </div>
-  <div class="md-source__repository">
-    View on GitHub
-  </div>
-</a>
-      </div>
-    
   </nav>
   
 </header>
@@ -312,18 +298,6 @@
     </a>
     MLOpsAditya
   </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
-  </div>
-  <div class="md-source__repository">
-    View on GitHub
-  </div>
-</a>
-    </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
     
@@ -483,6 +457,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assignment 3
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -499,6 +491,219 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fine-tune-distilbert-to-classify-goodreads-book-reviews-into-8-genres-containerised-with-docker-and-published-to-hugging-face-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        &gt; Fine-tune DistilBERT to classify Goodreads book reviews into 8 genres — containerised with Docker and published to Hugging Face Hub.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation Results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluation Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training-curve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training Curve
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#per-class-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-Class Performance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Per-Class Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hub-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hub Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Challenges
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Challenges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-label-mapping-bug-root-cause-of-14-initial-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Label Mapping Bug (Root Cause of 14% Initial Accuracy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cross-genre-vocabulary-overlap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cross-Genre Vocabulary Overlap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-overfitting-at-epoch-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Overfitting at Epoch 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-docker-gpu-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Docker GPU Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-huggingface-authentication-in-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HuggingFace Authentication in Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -677,6 +882,208 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fine-tune-distilbert-to-classify-goodreads-book-reviews-into-8-genres-containerised-with-docker-and-published-to-hugging-face-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        &gt; Fine-tune DistilBERT to classify Goodreads book reviews into 8 genres — containerised with Docker and published to Hugging Face Hub.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation Results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluation Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training-curve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training Curve
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#per-class-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-Class Performance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Per-Class Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hub-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hub Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Challenges
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Challenges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-label-mapping-bug-root-cause-of-14-initial-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Label Mapping Bug (Root Cause of 14% Initial Accuracy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cross-genre-vocabulary-overlap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cross-Genre Vocabulary Overlap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-overfitting-at-epoch-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Overfitting at Epoch 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-docker-gpu-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Docker GPU Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-huggingface-authentication-in-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HuggingFace Authentication in Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -691,15 +1098,7 @@
                   
 
 
-  
-  
 
-
-<h1 id="assg_3">assg_3</h1>
-<blockquote>
-<p>Auto-generated from branch: assg_3</p>
-</blockquote>
-<hr />
 <h1 id="training-and-fine-tuning-bert-for-classification">Training and Fine-Tuning BERT for Classification</h1>
 <h2 id="fine-tune-distilbert-to-classify-goodreads-book-reviews-into-8-genres-containerised-with-docker-and-published-to-hugging-face-hub">&gt; Fine-tune <strong>DistilBERT</strong> to classify Goodreads book reviews into 8 genres — containerised with Docker and published to Hugging Face Hub.</h2>
 <h2 id="project-overview">Project Overview</h2>
@@ -1067,11 +1466,6 @@ DistilBERT was selected for its balance of speed and performance. It trains sign
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
   
 </div>
       
